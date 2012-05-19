@@ -28,6 +28,11 @@ module NCursesGui
 			FFI::NCurses.raw
 			FFI::NCurses.cbreak
 			FFI::NCurses.noecho
+
+			FFI::NCurses.start_color
+			FFI::NCurses.init_pair(1, FFI::NCurses::COLOR_BLACK, FFI::NCurses::COLOR_RED)
+			FFI::NCurses.attr_set FFI::NCurses::A_NORMAL, 1, nil
+
 			#FFI::NCurses.keypad(FFI::NCurses.stdscr, true)
 
 			refresh
