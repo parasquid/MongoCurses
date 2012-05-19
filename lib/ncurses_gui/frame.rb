@@ -4,12 +4,11 @@ require "#{File.dirname(__FILE__)}/window"
 module NCursesGui
 	class Frame < Window
 		def initialize(options = {})
-			if options[:parent].nil?
-				height = FFI::NCurses.getmaxy(FFI::NCurses.stdscr)
-				width = FFI::NCurses.getmaxx(FFI::NCurses.stdscr)
-				startx = 0
-				starty = 0
-			end
+			@parent = options[:parent] || FFI::NCurses.stdscr
+			height = FFI::NCurses.getmaxy(@parent)
+			width = FFI::NCurses.getmaxx(@parent)
+			startx = options[:startx] || 0
+			starty = options[:starty] || 0
 			@window = FFI::NCurses.newwin(height, width, startx, starty)
 			
 			#int wborder(win, ls, rs, ts, bs, tl, tr, bl, br)
@@ -24,10 +23,10 @@ module NCursesGui
 		end
 
 		def redraw
-endwin
-refresh
-			height = FFI::NCurses.getmaxy(FFI::NCurses.stdscr)
-			width = FFI::NCurses.getmaxx(FFI::NCurses.stdscr)
+			endwin
+			refresh
+			height = FFI::NCurses.getmaxy(@parent)
+			width = FFI::NCurses.getmaxx(@parent)
 			startx = 0
 			starty = 0
 			#puts "#{height} #{width}"
