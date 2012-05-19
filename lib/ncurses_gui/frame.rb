@@ -7,6 +7,8 @@ module NCursesGui
 			@parent = options[:parent] || FFI::NCurses.stdscr
 			@startx = options[:startx] || 0
 			@starty = options[:starty] || 0
+			@height = options[:height]
+			@width = options[:width]
 
 			draw_window
 
@@ -27,8 +29,9 @@ module NCursesGui
 		private
 
 		def draw_window
-			(height, width) = get_dimensions(@parent)
-			@window = FFI::NCurses.newwin(height, width, @startx, @starty)
+			@height ||= get_height(@parent)
+			@width ||= get_width(@parent)
+			@window = FFI::NCurses.newwin(@height, @width, @startx, @starty)
 			FFI::NCurses.wborder(@window, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, 0,0,0,0)
 		end
 
