@@ -1,5 +1,4 @@
 require "#{File.dirname(__FILE__)}/lib/ncurses_gui/application"
-require "#{File.dirname(__FILE__)}/lib/ncurses_gui/frame"
 
 class MongoCurses < NCursesGui::Application
 	def on_init

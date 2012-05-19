@@ -21,5 +21,11 @@ module NCursesGui
 		def get_width(parent)
 			width = FFI::NCurses.getmaxx(parent)
 		end
+
+		def midpoint(options)
+			width = options[:width]
+			length = options[:length]
+			(width / 2) - (length / 2)
+		end
 	end
 end
